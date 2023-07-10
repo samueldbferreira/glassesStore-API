@@ -24,6 +24,7 @@ const signup = async (req, res) => {
 		firstName,
 		lastName,
 		email,
+		phone: "",
 		password: newPassword,
 		admin: false,
 	});
