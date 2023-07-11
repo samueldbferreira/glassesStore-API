@@ -5,6 +5,8 @@ const meRouter = require("./routes/meRoutes");
 const authRouter = require("./routes/authRoutes");
 const addressRouter = require("./routes/addressRoutes");
 const usersRouter = require("./routes/usersRoutes");
+const productsRouter = require("./routes/productsRoutes");
+const ordersRouter = require("./routes/ordersRoutes");
 
 require("dotenv").config();
 
@@ -17,6 +19,8 @@ app.use("/me", meRouter);
 app.use("/auth", authRouter);
 app.use("/enderecos", addressRouter);
 app.use("/usuarios", usersRouter);
+app.use("/produtos", productsRouter);
+app.use("/pedidos", ordersRouter);
 
 mongoose
 	.connect(
