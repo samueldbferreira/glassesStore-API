@@ -18,4 +18,14 @@ router.get("/:id", productsControllers.getProduct);
 
 router.get("/", productsControllers.getAll);
 
+router.patch(
+	"/:id",
+	checkToken,
+	checkAdmin,
+	upload.array("images"),
+	productsControllers.patchProduct
+);
+
+router.delete("/:id", productsControllers.deleteProduct);
+
 module.exports = router;

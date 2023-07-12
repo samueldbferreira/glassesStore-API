@@ -80,8 +80,6 @@ const getProduct = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
-	console.log(req.query.categoria);
-
 	try {
 		const products = await Product.find(
 			req.query.categoria ? { category: req.query.categoria } : {}
@@ -94,8 +92,61 @@ const getAll = async (req, res) => {
 	}
 };
 
+const patchProduct = async (req, res) => {
+	const {
+		name,
+		category,
+		price,
+		installments,
+		stock,
+		colors,
+		description,
+		width,
+		height,
+		stem,
+		noseSpace,
+		material,
+	} = req.body;
+	const images = req.files && req.files.map((file) => file.path);
+
+	if (req.body.colors) {
+		req.body.colors = JSON.parse(req.body.colors);
+	}
+
+	try {
+		const product = await Product.findById(req.params.id);
+		Object.assign(product, { ...req.body, images });
+		await product.save();
+
+		return res.status(StatusCodes.CREATED).json({
+			msg: "Produto atualizado com sucesso.",
+			data: product,
+		});
+	} catch (err) {
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+			msg: "Erro ao cadastrar produto.",
+		});
+	}
+};
+
+const deleteProduct = async (req, res) => {
+	try {
+		await Product.findByIdAndDelete(req.params.id);
+
+		return res.status(StatusCodes.CREATED).json({
+			msg: "Produto excluído com sucesso.",
+		});
+	} catch (err) {
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+			msg: "Erro ao excluir produto.",
+		});
+	}
+};
+
 module.exports = {
 	postProduct,
 	getProduct,
 	getAll,
+	patchProduct,
+	deleteProduct,
 };

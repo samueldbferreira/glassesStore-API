@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const Product = require("../models/Product");
 const StatusCodes = require("http-status-codes").StatusCodes;
 
 const postOrder = async (req, res) => {
@@ -10,6 +11,12 @@ const postOrder = async (req, res) => {
 	const date = new Date();
 
 	try {
+		items.forEach(async (i) => {
+			const item = await Product.findById(i.id.split(",")[0]);
+			Object.assign(item, { ...item, stock: item.stock - i.quantity });
+			item.save();
+		});
+
 		const order = await Order.create({
 			idCustomer: req.userID,
 			total,
