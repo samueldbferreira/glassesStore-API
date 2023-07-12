@@ -17,6 +17,7 @@ const postProduct = async (req, res) => {
 		material,
 	} = req.body;
 	const images = req.files && req.files.map((file) => file.path);
+	console.log(images);
 
 	if (
 		!name ||
@@ -93,20 +94,6 @@ const getAll = async (req, res) => {
 };
 
 const patchProduct = async (req, res) => {
-	const {
-		name,
-		category,
-		price,
-		installments,
-		stock,
-		colors,
-		description,
-		width,
-		height,
-		stem,
-		noseSpace,
-		material,
-	} = req.body;
 	const images = req.files && req.files.map((file) => file.path);
 
 	if (req.body.colors) {
