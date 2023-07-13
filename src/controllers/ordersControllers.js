@@ -37,6 +37,17 @@ const postOrder = async (req, res) => {
 	}
 };
 
+const getUserOrders = async (req, res) => {
+	try {
+		const orders = await Order.find({ idCustomer: req.params.id });
+		return res.status(StatusCodes.OK).json(orders);
+	} catch (err) {
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+			msg: "Erro ao buscar pedidos.",
+		});
+	}
+};
+
 const getOrders = async (req, res) => {
 	try {
 		const orders = await Order.find({ idCustomer: req.userID });
@@ -50,5 +61,6 @@ const getOrders = async (req, res) => {
 
 module.exports = {
 	postOrder,
+	getUserOrders,
 	getOrders,
 };

@@ -10,7 +10,7 @@ router.post(
 	"/",
 	checkToken,
 	checkAdmin,
-	upload.array("images"),
+	upload.any("images"),
 	productsControllers.postProduct
 );
 
@@ -22,7 +22,7 @@ router.patch(
 	"/:id",
 	checkToken,
 	checkAdmin,
-	upload.array("images"),
+	upload.any("images"),
 	productsControllers.patchProduct
 );
 
