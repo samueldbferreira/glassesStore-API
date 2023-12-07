@@ -26,7 +26,7 @@ app.use("/pedidos", ordersRouter);
 
 mongoose
 	.connect(
-		`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.7o7twza.mongodb.net/?retryWrites=true&w=majority`
+		`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.fwysfiz.mongodb.net/?retryWrites=true&w=majority`
 	)
 	.then(() => {
 		app.listen(process.env.PORT || 3000, () => {
